@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receitas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">  
+  <style>
+    .bg-warning {
+      background-color: #ffc107 !important;
+    }
+  </style>
+</head>
+<body class="container-fluid bg-warning" onload="preencheCatalogo()">
+
+  <header class="text-center">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item btn btn-dark">
+              <a class="nav-link" href="ordenando.html">Ordenação</a>
+            </li>
+
+            <li class="nav-item btn btn-dark">
+              <a class="nav-link" class="" href="usuarios.html">Transmissão de Dados VueJs</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1>Receitas</h1>
+  </header>
+
+
+  <main class="">
+    <section class="" id="pnlCatalogo">
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white text-center">
+    <p>&copy; Culinária Mineira</p>
+  </footer>
+
+<script>
+  const ordenando = {
+    template: '<div><h2>Ordenando Página</h2></div>'
+  };
+
+  const usuarios = {
+    template: '<div><h2>Transmissão de Dados VueJs Página</h2></div>'
+  };
+</script>
+
+
+  <script>
+    const receitas = [
+      {
+        titulo: "Frango com Quiabo",
+        imagem: "img/frango-quiabo.webp",
+        ingredientes: ["1kg de frango", "1 cebola ralada", "Pimenta do reino", "Sal", "2 Colheres de sopa de óleo", "2 dentes de alho", "400g de quiabo"],
+        preparo: "Em uma panela coloque óleo e vá fritando o frango aos poucos. Na mesma panela que fritou o frango coloque alho, cebola, pimenta, sal e refogue o quiabo deixe dourar mexendo de vez em quando. Depois que o quiabo estiver dourado junte o frango e deixe cozinhar com a panela tampada até ficarem macios. Adicione 1 xícara de chá de água para formar caldinho depois de tudo bem cozido retire."
+      },
+      {
+        titulo: "Tutu de Feijão",
+        imagem: "img/tutu-feijao.jpg",
+        ingredientes: ["2 xícaras de feijão cozido", "100g de bacon picado", "1 xícara de cheiro verde", "Farinha de mandioca crua", "3 dentes de alho", "1 gomo de linguiça calabreza", "Orégano, sal e pimenta do reino"],
+        preparo: "Fritar a cebola, o alho, o bacon e a lingüiça em uma frigideira grande. Junte o feijão, os temperos e o cheiro verde e por fim a farinha até dar o ponto desejado, mais cremoso ou mais sequinho. Sirva quente com arroz branco e bisteca de porco."
+      },
+      {
+        titulo: "Angu de Fubá",
+        imagem: "img/angu-fuba.webp",
+        ingredientes: ["4 colheres de sopa de fubá", "400ml de água para ferver", "150ml de água para misturar o fubá"],
+        preparo: "Inicie colocando os quatrocentos ml de água em uma panela e ferva. Em uma vasilha pequena coloque cento e cinquenta ml de água e despeje quatro colheres de fubá. Misture e deixe a parte. Quando a água estiver fervendo, adicione o fubá já incorporado com os cento e cinquenta ml de água e misture tudo por cerca de três a cinco minutos e tampe a panela. Uma vez ou outra mexa o angu para que não queime e todo corpo do alimento seja cozido por completo. Para saber se o angu esta pronto basta observar a panela. Se nas bordas se o mesmo estiver desprendendo esta pronto."
+      },
+    ];
+
+    function getListaIngredientes(ingredientes) {
+      return `<ul>${ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('')}</ul>`;
+    }
+
+    function getCard(receita) {
+      return `
+      <div class="d-flex align-self-stretch m-1">
+        <div class="card " style="width: 441px;">
+          <img src="${receita.imagem}" alt="${receita.titulo}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">${receita.titulo}</h5>
+            <div class="card-text">
+              ${getListaIngredientes(receita.ingredientes)}
+              <hr>
+              <p>${receita.preparo}</p>
+            </div>
+          </div>
+        </div>
+      </div>`
+    }
+
+    function preencheCatalogo() {
+      const pnlCatalogo = document.getElementById('pnlCatalogo');
+      pnlCatalogo.innerHTML = `<div class="d-flex flex-wrap justify-content-center">${receitas.map(receita => getCard(receita)).join('')}</div>`;
+      
+    }
+
+    window.onload = preencheCatalogo;
+  </script>
+
+</body>
+</html>
